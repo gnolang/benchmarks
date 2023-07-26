@@ -4,11 +4,11 @@ on:
     branches:
       - ci/supernova
   schedule:
-    - cron: '0 2 * * *' # run at 2 AM UTC
+    - cron: "0 2 * * *" # run at 2 AM UTC
 
 jobs:
   supernova:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     permissions:
       contents: write
@@ -70,5 +70,5 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          push_options: '--force'
+          push_options: "--force"
           commit_message: add daily report
