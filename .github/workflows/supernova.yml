@@ -34,6 +34,8 @@ jobs:
 
       - name: download supernova
         run: |
+          rm -rf /tmp/main.zip /tmp/supernova-main
+
           export SUPERNOVA_VERSION=1.0.0
           wget -c https://github.com/gnolang/supernova/releases/download/v${SUPERNOVA_VERSION}/supernova_${SUPERNOVA_VERSION}_linux_amd64.tar.gz -O - | tar -xz -C /tmp
           # install supernova scripts
@@ -43,6 +45,7 @@ jobs:
 
       - name: run supernova
         run: |
+          sleep 10
           curl -v http://localhost:26657/status
           /tmp/supernova -sub-accounts 5 -transactions 100 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
 
