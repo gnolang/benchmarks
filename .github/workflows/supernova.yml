@@ -9,7 +9,7 @@ on:
 
 jobs:
   supernova:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64, benchmark-v1]
 
     permissions:
       contents: write
