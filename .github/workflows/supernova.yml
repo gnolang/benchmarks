@@ -5,10 +5,11 @@ on:
       - ci/supernova
   schedule:
     - cron: "0 2 * * *" # run at 2 AM UTC
+  workflow_dispatch:
 
 jobs:
   supernova:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64, benchmark-v1]
 
     permissions:
       contents: write
