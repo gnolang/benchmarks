@@ -1,1 +1,1 @@
-{"averageTPS":56,"blocks":[{"blockNumber":10,"created":"2023-09-11T02:16:30.518525068Z","numTransactions":60,"gasUsed":9623846,"gasLimit":10000000},{"blockNumber":11,"created":"2023-09-11T02:16:35.526308525Z","numTransactions":40,"gasUsed":6427960,"gasLimit":10000000}]}
+{"averageTPS":77,"blocks":[{"blockNumber":10,"created":"2023-09-11T13:43:21.706046558Z","numTransactions":60,"gasUsed":9623846,"gasLimit":10000000},{"blockNumber":11,"created":"2023-09-11T13:43:26.717896477Z","numTransactions":40,"gasUsed":6427960,"gasLimit":10000000}]}
