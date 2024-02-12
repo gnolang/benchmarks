@@ -47,7 +47,7 @@ jobs:
         run: |
           sleep 10
           curl -v http://localhost:26657/status
-          /tmp/supernova -sub-accounts 5 -transactions 100 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
+          /tmp/supernova -sub-accounts 10 -transactions 1000 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
 
       - name: archive supernova result
         uses: actions/upload-artifact@v3
