@@ -30,6 +30,7 @@ jobs:
         run: |
           docker exec ${{ job.services.gnoland.id }} gnoland start -skip-start=true
           docker exec ${{ job.services.gnoland.id }} sed -i 's#laddr =.*:26657.*#laddr = "tcp://0.0.0.0:26657"#g' testdir/config/config.toml
+          docker exec ${{ job.services.gnoland.id }} sed -i 's#skip_timeout_commit = false#skip_timeout_commit = true"#g' testdir/config/config.toml
           docker exec -dit ${{ job.services.gnoland.id }} gnoland start
 
       - name: download supernova
