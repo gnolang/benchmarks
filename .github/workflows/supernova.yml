@@ -47,25 +47,25 @@ jobs:
           curl -v http://localhost:26657/status
           /tmp/supernova -sub-accounts 10 -transactions 1000 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
 
-      - name: archive supernova result
-        uses: actions/upload-artifact@v3
-        with:
-          name: supernova-result.json
-          path: result.json
+      # - name: archive supernova result
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: supernova-result.json
+      #     path: result.json
 
-      - name: Send report to slack \#gno-core-tech
-        run: |
-          DATA=$(cat result.json | jq -r )
-          PAYLOAD="{\"payload\": '$DATA'}"
-          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" $SLACK_WEBHOOK_URL
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.CI_REPORT_SLACK_WEBHOOK }}
+      # - name: Send report to slack \#gno-core-tech
+      #   run: |
+      #     DATA=$(cat result.json | jq -r )
+      #     PAYLOAD="{\"payload\": '$DATA'}"
+      #     curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" $SLACK_WEBHOOK_URL
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.CI_REPORT_SLACK_WEBHOOK }}
 
-      - name: move result.json in reports/
-        run: |
-          mkdir -p reports/supernova
-          mv result.json reports/supernova/$(date +"%Y-%m-%d")_report.json
+      # - name: move result.json in reports/
+      #   run: |
+      #     mkdir -p reports/supernova
+      #     mv result.json reports/supernova/$(date +"%Y-%m-%d")_report.json
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: add daily report
+      # - uses: stefanzweifel/git-auto-commit-action@v4
+      #   with:
+      #     commit_message: add daily report
