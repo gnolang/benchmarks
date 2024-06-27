@@ -13,7 +13,7 @@ jobs:
 
     services:
       gnoland:
-        image: ghcr.io/gnolang/gno/gnoland:master
+        image: ghcr.io/gnolang/gno/gnoland:0.1.0-nightly.20240620
         # keep the container running
         options: --workdir /opt/gno/src/gno.land -it --entrypoint "sh"
         ports:
@@ -29,8 +29,6 @@ jobs:
           docker exec ${{ job.services.gnoland.id }} sed -i 's#laddr =.*:26657.*#laddr = "tcp://0.0.0.0:26657"#g' gnoland-data/config/config.toml
           docker exec ${{ job.services.gnoland.id }} sed -i 's#skip_timeout_commit = false#skip_timeout_commit = true#g' gnoland-data/config/config.toml
           docker exec -dit ${{ job.services.gnoland.id }} gnoland start -lazy
-          sleep 20
-          curl -v http://127.0.0.1:26657/status
 
       - name: download supernova
         run: |
@@ -47,7 +45,7 @@ jobs:
         run: |
           sleep 20
           curl -v http://127.0.0.1:26657/status
-          /tmp/supernova -sub-accounts 10 -transactions 1000 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
+          /tmp/supernova -sub-accounts 1 -transactions 10 -url http://localhost:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json
 
       # - name: archive supernova result
       #   uses: actions/upload-artifact@v3
