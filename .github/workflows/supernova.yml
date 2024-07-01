@@ -2,7 +2,7 @@ name: Supernova
 on:
   push:
     branches:
-      - ci/supernova-dummy
+      - ci/supernova-fix
 
 jobs:
   supernova:
