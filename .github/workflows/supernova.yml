@@ -16,7 +16,7 @@ jobs:
 
     services:
       gnoland:
-        image: ghcr.io/gnolang/gno:nightly
+        image: ghcr.io/gnolang/gno/gnoland:nightly
         # keep the container running
         options: --workdir /gnoroot -it --entrypoint "sh"
         ports:
