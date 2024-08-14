@@ -2,7 +2,7 @@ name: Supernova
 on:
   push:
     branches:
-      - ci/supernova-fix
+      - ci/supernova
   schedule:
     - cron: "0 2 * * *" # run at 2 AM UTC
   workflow_dispatch:
@@ -36,7 +36,6 @@ jobs:
       - name: download supernova
         run: |
           rm -rf /tmp/main.zip /tmp/supernova-main
-
           export SUPERNOVA_VERSION=1.3.1
           wget -c https://github.com/gnolang/supernova/releases/download/v${SUPERNOVA_VERSION}/supernova_${SUPERNOVA_VERSION}_linux_amd64.tar.gz -O - | tar -xz -C /tmp
 
