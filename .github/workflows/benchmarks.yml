@@ -1,0 +1,22 @@
+name: Benchmarks
+
+on:
+    workflow_dispatch:
+    schedule:
+      - cron:  '0 1 * * *' # run on default branch every day
+jobs:
+    benchmarks:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - name: Checkout from gno repository
+          uses: actions/checkout@v3
+          with:
+            repository: gnolang/gno
+            fetch-depth: 2
+            ref: 'gh-benchmarks'
+        - name: Commit & Push changes
+          uses: stefanzweifel/git-auto-commit-action@v4
+          with:
+            branch: gh-pages
