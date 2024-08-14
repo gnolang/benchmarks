@@ -2,23 +2,23 @@ name: Supernova
 on:
   push:
     branches:
-      - ci/supernova
+      - ci/supernova-fix
   schedule:
     - cron: "0 2 * * *" # run at 2 AM UTC
   workflow_dispatch:
 
 jobs:
   supernova:
-    runs-on: [self-hosted, Linux, X64, benchmark-v1]
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
 
     services:
       gnoland:
-        image: ghcr.io/gnolang/gno/gnoland:0.1.0-nightly.20240620
+        image: ghcr.io/gnolang/gno:nightly
         # keep the container running
-        options: --workdir /opt/gno/src/gno.land -it --entrypoint "sh"
+        options: --workdir /gnoroot -it --entrypoint "sh"
         ports:
           - 26657:26657
           - 36657:36657
@@ -37,16 +37,15 @@ jobs:
         run: |
           rm -rf /tmp/main.zip /tmp/supernova-main
 
-          export SUPERNOVA_VERSION=1.2.0
+          export SUPERNOVA_VERSION=1.3.1
           wget -c https://github.com/gnolang/supernova/releases/download/v${SUPERNOVA_VERSION}/supernova_${SUPERNOVA_VERSION}_linux_amd64.tar.gz -O - | tar -xz -C /tmp
-          # install supernova scripts
-          wget -O /tmp/main.zip https://github.com/gnolang/supernova/archive/refs/heads/main.zip
-          unzip -d /tmp/ /tmp/main.zip
-          cp -r /tmp/supernova-main/scripts .
 
+      # - name: wait Gno to be ready (sleep)
+      #   run: |
+      #     sleep 20
+      
       - name: run supernova
         run: |
-          sleep 20
           curl -v http://127.0.0.1:26657/status
           /tmp/supernova -sub-accounts 10 -transactions 1000 -url http://127.0.0.1:26657 -mnemonic "source bonus chronic canvas draft south burst lottery vacant surface solve popular case indicate oppose farm nothing bullet exhibit title speed wink action roast" -output result.json > /dev/null 2>&1
 
