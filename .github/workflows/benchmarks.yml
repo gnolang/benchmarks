@@ -10,12 +10,13 @@ jobs:
       permissions:
         contents: write
       steps:
-        - name: Checkout from gno repository
+        - name: Checkout
           uses: actions/checkout@v4
-          with:
-            repository: gnolang/gno
-            ref: 'gh-benchmarks'
-        - name: Commit & Push changes
-          uses: stefanzweifel/git-auto-commit-action@v5
-          with:
-            branch: gh-pages
+        - name: Fetch Branch from Gno Repository
+          run: |
+            git remote add upstream https://github.com/gnolang/gno.git
+            git fetch upstream gh-benchmarks
+            git checkout -b gh-pages upstream/gh-benchmarks
+        - name: Push Branch to gh-pages
+          run: |
+            git push origin gh-pages --force
